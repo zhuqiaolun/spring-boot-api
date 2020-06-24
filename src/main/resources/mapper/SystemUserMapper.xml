@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yetech.springbootapi.database.dao.SystemUserMapper">
+<mapper namespace="com.demon.springbootapi.database.dao.SystemUserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yetech.springbootapi.database.entity.SystemUser">
+    <resultMap id="BaseResultMap" type="com.demon.springbootapi.database.entity.SystemUser">
         <id column="u_id" property="uId" />
         <result column="app_id" property="appId" />
         <result column="app_key" property="appKey" />

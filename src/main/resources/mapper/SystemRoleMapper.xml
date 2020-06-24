@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yetech.springbootapi.database.dao.SystemRoleMapper">
+<mapper namespace="com.demon.springbootapi.database.dao.SystemRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yetech.springbootapi.database.entity.SystemRole">
+    <resultMap id="BaseResultMap" type="com.demon.springbootapi.database.entity.SystemRole">
         <id column="r_id" property="rId" />
         <result column="role_name" property="roleName" />
     </resultMap>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yetech.springbootapi.database.dao.SystemMenuMapper">
+<mapper namespace="com.demon.springbootapi.database.dao.SystemMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yetech.springbootapi.database.entity.SystemMenu">
+    <resultMap id="BaseResultMap" type="com.demon.springbootapi.database.entity.SystemMenu">
         <id column="m_id" property="mId" />
         <result column="menu_name" property="menuName" />
         <result column="menu_url" property="menuUrl" />
