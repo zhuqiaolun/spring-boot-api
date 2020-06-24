@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <!-- <property name="LOG_HOME" value="/home" />-->
+    <property name="LOG_HOME" value="D:/logs" />
+    <!--控制台日志， 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度,%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 将日志写入数据库(官方) -->
+    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://127.0.0.1:3306/spring_boot_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
+            <user>root</user>
+            <password>root</password>
+        </connectionSource>
+    </appender>
+
+    <!-- 将日志写入数据库(自定义) -->
+    <appender name="DB_SQL" class="com.yetech.springbootapi.config.LogDbAppenderConfig">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://127.0.0.1:3306/spring_boot_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
+            <user>root</user>
+            <password>root</password>
+        </connectionSource>
+    </appender>
+
+
+    <!--mybatisplus log configure-->
+    <logger name="com.baomidou.mybatisplus" level="INFO"/>
+    <logger name="java.sql.Connection" level="INFO" />
+    <logger name="java.sql.Statement" level="INFO"/>
+    <logger name="java.sql.PreparedStatement" level="INFO"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.security.web" level="INFO"/>
+
+    <!-- 日志输出级别 -->
+    <!--<root level="DEBUG">-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="DB"/>
+        <appender-ref ref="DB_SQL"/>
+    </root>
+</configuration>

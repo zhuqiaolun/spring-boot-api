@@ -1,0 +1,28 @@
+# Tomcat
+server:
+  port: 8011
+  servlet:
+    context-path: /spring-boot-api
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      # 最大线程数
+      max: 1000
+      # 最小线程数
+      min-spare: 30
+    # 队列长度
+    accept-count: 50
+    # 最大链接数
+    max-connections: 1000
+    # 链接建立超时时间 ms
+    connection-timeout: 50000
+
+spring:
+  application:
+    name: spring-boot-api
+  profiles:
+    active: mybatis, redis
+  jackson:
+    default-property-inclusion: non_null
+
+

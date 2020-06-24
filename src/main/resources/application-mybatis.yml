@@ -1,0 +1,49 @@
+spring:
+  # 数据库连接
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://127.0.0.1:3306/spring_boot_api?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
+    #url: jdbc:p6spy:mysql://localhost:3306/spring_boot_api?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    # Spring Boot 2.0及以上版本 默认选择，不需要配置
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      # 客户端等待连接池连接的最大毫秒数
+      connection-timeout: 20000
+      # 连接池中维护的最小空闲连接数
+      minimum-idle: 5
+      # 配置最大池大小
+      maximum-pool-size: 12
+      # 允许连接在连接池中空闲的最长时间（以毫秒为单位）
+      idle-timeout: 300000
+      # 池中连接关闭后的最长生命周期（以毫秒为单位）
+      max-lifetime: 1200000
+      # 从池返回的连接的默认自动提交行为。默认值为true。
+      auto-commit: true
+
+# mybatis-plus配置
+mybatis-plus:
+  # MyBatis 配置文件
+  configuration:
+    # 映射器启用缓存
+    cache-enabled: false
+    # 查询时，关闭关联对象即时加载以提高性能
+    lazy-loading-enabled: false
+    # 不允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值), 数据表的PK生成策略将被覆盖
+    use-generated-keys: false
+    # 对于批量更新操作缓存SQL以提高性能 SIMPLE, REUSE, BATCH
+    default-executor-type: reuse
+    # 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
+    multiple-result-sets-enabled: true
+    # 允许使用列标签代替列名
+    use-column-label: true
+    # 解决mybatis空字段null字段不返回
+    call-setters-on-nulls: true
+    # 给予被嵌套的resultMap以字段-属性的映射支持 NONE, FULL,PARTIAL
+    auto-mapping-behavior: partial
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 启动时是否检查 MyBatis XML 文件的存在，默认不检查。
+  check-config-location: false
+  # mapper.xml所在位置
+  mapper-locations: classpath:/mapper/*.xml
