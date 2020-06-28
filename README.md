@@ -1,66 +1,36 @@
 # spring-boot-api
-spring-boot 集成
+spring-boot集成 - 后台管理
 
-logging集成mysql的数据库sql语句:
+# 应用技术
+spring-boot-starter-parent（2.3.0.RELEASE）
+spring-boot-starter-security（安全权限）
+spring-boot-starter-data-redis（redis缓存）
+logback（日志管理）
+mybatis-plus-boot-starter（3.3.2）（数据库连接）
+mysql-connector-java（5.1.34）（数据库）
+p6spy（3.9.0）（执行SQL分析打印）
+jjwt（0.9.1）（token生成）
+fastjson（1.2.62）（json解析）
+httpclient（4.5.12）（https配置）
+UserAgentUtils（1.21）（请求解析）
 
-    BEGIN;
-    DROP TABLE IF EXISTS logging_event_property;
-    DROP TABLE IF EXISTS logging_event_exception;
-    DROP TABLE IF EXISTS logging_event;
-    COMMIT;
+# 应用说明
+项目有4个请求;
+../auth/getToken ：请求获取token，时效7200秒
+../test : 测试，此请求过滤权限验证
+../weather/** : 应用请求，获取天气数值，权限设置为指定IP以及IP范围，请求时不需要token，可进行or,and添加更多
+../user/** : 应用请求，获取用户数值，权限设置为token有效验证，但不限制IP，可进行or,and添加指定IP
 
-    BEGIN;
-    CREATE TABLE logging_event
-      (
-        timestmp         BIGINT NOT NULL,
-        formatted_message  TEXT NOT NULL,
-        logger_name       VARCHAR(254) NOT NULL,
-        level_string      VARCHAR(254) NOT NULL,
-        thread_name       VARCHAR(254),
-        reference_flag    SMALLINT,
-        arg0              VARCHAR(254),
-        arg1              VARCHAR(254),
-        arg2              VARCHAR(254),
-        arg3              VARCHAR(254),
-        caller_filename   VARCHAR(254) NOT NULL,
-        caller_class      VARCHAR(254) NOT NULL,
-        caller_method     VARCHAR(254) NOT NULL,
-        caller_line       CHAR(4) NOT NULL,
-        event_id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
-      );
-    COMMIT;
-    
-    BEGIN;
-    CREATE TABLE logging_event_property
-      (
-        event_id          BIGINT NOT NULL,
-        mapped_key        VARCHAR(254) NOT NULL,
-        mapped_value      TEXT,
-        PRIMARY KEY(event_id, mapped_key),
-        FOREIGN KEY (event_id) REFERENCES logging_event(event_id)
-      );
-    COMMIT;
-    
-    BEGIN;
-    CREATE TABLE logging_event_exception
-      (
-        event_id         BIGINT NOT NULL,
-        i                SMALLINT NOT NULL,
-        trace_line       VARCHAR(254) NOT NULL,
-        PRIMARY KEY(event_id, i),
-        FOREIGN KEY (event_id) REFERENCES logging_event(event_id)
-      );
-    COMMIT;
+权限设置需要在WebSecurityConfig.java中设置
 
+# 项目流程
+```flow
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
 
-自定义sql表：
-
-    DROP TABLE IF EXISTS `system_logging_sql`;
-    CREATE TABLE `system_logging_sql` (
-      `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-      `message` VARCHAR(300) NOT NULL COMMENT '内容',
-      `level_string` VARCHAR(254) NOT NULL COMMENT '级别',
-      `created_time` DATETIME NOT NULL COMMENT '时间',
-      `logger_name` VARCHAR(300) NOT NULL COMMENT '全类名',
-      PRIMARY KEY (`id`)
-    ) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='自定义日志记录表'
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
