@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * http请求设置
      */
-    @SuppressWarnings("SpringElInspection")
+    @SuppressWarnings({"SpringElInspection"})
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
