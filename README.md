@@ -16,7 +16,6 @@ httpclient（4.5.12）（https配置）
 UserAgentUtils（1.21）（请求解析）
 ```
 
-
 # 应用说明
 项目有4个请求;
 ```html
@@ -28,12 +27,40 @@ UserAgentUtils（1.21）（请求解析）
 权限设置需要在WebSecurityConfig.java中设置
 
 # 项目流程
-```flow
-st=>start: Start
-op=>operation: Your Operation
-cond=>condition: Yes or No?
-e=>end
-st->op->cond
-cond(yes)->e
-cond(no)->op
+生成token
+```html
+客户端请求 ==> 验证appId、appKey ==> 进入JwtAuthenticationFilter拦截  ==>  进入UserDetailsServiceImpl查询DB ==> 验证appId、appKey ==>  
+存在：生成token返回
+不存在：错误返回
+```
+请求天气
+```html
+客户端请求 ==> 进入JwtAuthorizationFilter拦截 ==> 验证IP ==> 执行AOP ==> 
+存在：生成数据返回
+不存在：错误返回
+```
+请求用户
+```html
+客户端请求 ==> 进入JwtAuthorizationFilter拦截 ==> 进入MyRbacPermission验证token ==> 
+存在：生成数据返回
+不存在：错误返回
+```
+
+AOP:
+```html
+项目设置AOP，可通过 @CustomVerify 注解方式使用，在方法上填写，默认值为：true
+```
+Redis:
+```html
+缓存作用在service层，自定义key，统一定义数据dto，通过键值对map的缓存存储，进行存取转化
+```
+
+日志：
+```html
+日志通过logback管理，将日志写入DB数据库(由官方提供SQL语句执行)
+```
+
+sql语句：
+```html
+语句通过P6Spy管理，将日志写入DB数据库内的自定义表 system_logging_sql，自行执行语句
 ```
