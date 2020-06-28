@@ -56,10 +56,10 @@ public class ControllerAspect {
                 ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                 if(attributes != null){
                     HttpServletRequest request = attributes.getRequest();
-
+                    System.out.println("AOP处理中···");
                     return proceedingJoinPoint.proceed();
                 }
-                return new ResponseBean<>().setErrMsg("获取请求失败");
+                return new ResponseBean().setErrMsg("获取请求失败");
             }else{
                 return proceedingJoinPoint.proceed();
             }
@@ -67,7 +67,7 @@ public class ControllerAspect {
 
         } catch (Exception e) {
             log.info("ControllerApi环绕AOP error ：{}", e);
-            return new ResponseBean<>().setErrMsg(e.getMessage());
+            return new ResponseBean().setErrMsg(e.getMessage());
         }
     }
 }

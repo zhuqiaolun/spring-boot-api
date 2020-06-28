@@ -1,5 +1,7 @@
 package com.demon.springbootapi.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.demon.springbootapi.aop.CustomVerify;
 import com.demon.springbootapi.util.ResponseBean;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,7 @@ import javax.annotation.Resource;
 
 /**
  * @ClassName: WeatherController
- * @Description:
+ * @Description: 天气
  * @Author: Demon
  * @Date: 2020/6/1 19:16
  */
@@ -21,12 +23,13 @@ public class WeatherController {
     @Resource
     private RestTemplate restTemplate;
 
+    @CustomVerify
     @PostMapping(value = "getToDayInfo")
-    public ResponseBean<Object> getToDayInfo(){
-        ResponseBean<Object> objectResponseBean = new ResponseBean<>();
+    public ResponseBean<JSONObject> getToDayInfo(){
+        ResponseBean<JSONObject> objectResponseBean = new ResponseBean<>();
         try{
             String url = "https://free-api.heweather.com/v5/forecast?city=CN101020600&key=5c043b56de9f4371b0c7f8bee8f5b75e";
-            String resp = restTemplate.getForObject(url, String.class);
+            JSONObject resp = restTemplate.getForObject(url, JSONObject.class);
             objectResponseBean.setSuccess(true).setData(resp);
         }catch (Exception e){
             e.printStackTrace();

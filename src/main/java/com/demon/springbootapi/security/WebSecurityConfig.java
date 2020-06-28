@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * http请求设置
      */
+    @SuppressWarnings("SpringElInspection")
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -98,11 +99,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 不需要授权访问的
                 .antMatchers("/auth/**").permitAll()
-                // 不需要token授权访问，但限制IP访问
+                // 不需要token授权访问，但限制IP访问(可设置IP范围)
                 .antMatchers(
-                        "/time","/time/**",
                         "/weather/**")
-                .access("hasIpAddress('127.0.0.1') or hasIpAddress('10.200.47.122') or hasIpAddress('10.200.47.66')")
+                .access("hasIpAddress('127.0.0.1') or hasIpAddress('10.200.47.0/24') ")
                 // 需要token授权访问的
                 .antMatchers(
                         "/user/**")
@@ -130,7 +130,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) {
             authenticationException.printStackTrace();
-            ResponseUtils.getErrResponse(response,4000100,"无权访问");
+            ResponseUtils.getErrResponse(response,40000,"无权访问");
         }
     }
 

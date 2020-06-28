@@ -24,8 +24,8 @@ public class UserController extends BaseController {
     private SystemUserService systemUserService;
 
     @PostMapping(value = "getBaseUserInfo")
-    public ResponseBean<Object> getBaseUserInfo(){
-        ResponseBean<Object> objectResponseBean = new ResponseBean<>();
+    public ResponseBean<Map<String, Object>> getBaseUserInfo(){
+        ResponseBean<Map<String, Object>> objectResponseBean = new ResponseBean<>();
         try{
             Map<String, Object> baseUserInfo = systemUserService.getBaseUserInfo(this.getAppId());
             objectResponseBean.setSuccess(true).setData(baseUserInfo);
@@ -37,8 +37,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "getQueryUserInfo")
-    public ResponseBean<Object> getQueryUserInfo(){
-        ResponseBean<Object> objectResponseBean = new ResponseBean<>();
+    public ResponseBean<Map<String, Object>> getQueryUserInfo(){
+        ResponseBean<Map<String, Object>> objectResponseBean = new ResponseBean<>();
         try{
             Map<String, Object> queryUserInfo = systemUserService.getQueryUserInfo(this.getAppId());
             objectResponseBean.setSuccess(true).setData(queryUserInfo);

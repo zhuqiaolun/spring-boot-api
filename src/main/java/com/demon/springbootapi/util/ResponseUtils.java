@@ -50,9 +50,9 @@ public class ResponseUtils {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("application/json; charset=utf-8");
         try (PrintWriter writer = httpServletResponse.getWriter()) {
-            ResponseBean responseBean = new ResponseBean();
-            responseBean.setErrCode(String.valueOf(errCode));
-            responseBean.setErrMsg(errMsg);
+            ResponseBean responseBean = new ResponseBean()
+                .setErrCode(String.valueOf(errCode))
+                .setErrMsg(errMsg);
             writer.print(JSONObject.toJSONString(responseBean));
         } catch (IOException e) {
             log.error("响应报错", e.getMessage());

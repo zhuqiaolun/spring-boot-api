@@ -3,6 +3,7 @@ package com.demon.springbootapi.security;
 import com.demon.springbootapi.util.ConstantUtil;
 import com.demon.springbootapi.util.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Author: Demon
  * @Date: 2020/6/4 10:30
  */
+@Slf4j
 @Component("myRbacPermission")
 public class MyRbacPermission {
 
@@ -31,7 +33,7 @@ public class MyRbacPermission {
             request.setAttribute(ConstantUtil.APP_KEY,params.get(ConstantUtil.APP_KEY));
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("权限验证异常",e.getMessage());
             return false;
         }
     }

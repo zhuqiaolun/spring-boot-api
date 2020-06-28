@@ -44,9 +44,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             //放行
             chain.doFilter(request, response);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("数据验证异常",e.getMessage());
             //返回验证失败
-            ResponseUtils.getErrResponse(response,40000,e.getMessage());
+            ResponseUtils.getErrResponse(response,20000,"数据验证异常");
         }
     }
 

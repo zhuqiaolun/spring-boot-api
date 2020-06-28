@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * @ClassName: JWTAuthenticationFilter
- * @Description: jwt 验证
+ * @Description: jwt 生成token
  * @Author: Demon
  * @Date: 2020/6/3 18:32
  *
@@ -70,19 +70,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put(ConstantUtil.APP_KEY, userDetailEntity.getPassword());
         Date expiresAt = DateUtils.addSeconds(new Date(), 7200);
         String token = JwtTokenUtil.createToken(claims, expiresAt);
-        ResponseBean<Object> objectResponseBean = new ResponseBean<>();
         JSONObject jsonObject = new JSONObject(true);
         jsonObject.put(ConstantUtil.ACCESS_TOKEN, token);
         jsonObject.put(ConstantUtil.EXPIRES_TIME, 7200);
-        objectResponseBean.setSuccess(true).setData(jsonObject);
-        ResponseUtils.out(response, objectResponseBean);
+        ResponseUtils.out(response, new ResponseBean<>().setSuccess(true).setData(jsonObject));
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
         failed.printStackTrace();
         response.setStatus(HttpServletResponse.SC_OK);
-        ResponseUtils.getErrResponse(response, 500, "appId 或者 appKey 错误");
+        ResponseUtils.getErrResponse(response, 10000, "appId 或者 appKey 错误");
     }
 
 }

@@ -16,8 +16,8 @@ public class RestGlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ResponseBean<Object> exceptionHandler(Exception e) {
+    public ResponseBean exceptionHandler(Exception e) {
         e.printStackTrace();
-        return new ResponseBean<>().setSuccess(false).setErrMsg(e.getMessage());
+        return new ResponseBean().setSuccess(false).setErrMsg(e.getMessage());
     }
 }

@@ -15,6 +15,8 @@ public class IpUtil {
 
     private static final String[] LOCAL_IP = {"127.0.0.1","localhost","0:0:0:0:0:0:0:1"};
     private static final String UNKNOWN = "unknown";
+    private static final Integer IP_ADDRESS_LENGTH = 15;
+    private static final String IP_ADDRESS_INDEX = ".";
 
     public static String getIpAddr(HttpServletRequest request) {
         String ipAddress;
@@ -42,9 +44,9 @@ public class IpUtil {
             }
             // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
             // "***.***.***.***".length()
-            if (ipAddress != null && ipAddress.length() > 15) {
+            if (ipAddress != null && ipAddress.length() > IP_ADDRESS_LENGTH) {
                 // = 15
-                if (ipAddress.indexOf(",") > 0) {
+                if (ipAddress.indexOf(IP_ADDRESS_INDEX) > 0) {
                     ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
                 }
             }
