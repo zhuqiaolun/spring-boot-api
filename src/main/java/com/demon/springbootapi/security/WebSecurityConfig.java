@@ -102,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 不需要token授权访问，但限制IP访问(可设置IP范围)
                 .antMatchers(
                         "/weather/**")
-                .access("hasIpAddress('127.0.0.1') or hasIpAddress('10.200.47.0/24') ")
+                .access("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.0/24') ")
                 // 需要token授权访问的
                 .antMatchers(
                         "/user/**")
