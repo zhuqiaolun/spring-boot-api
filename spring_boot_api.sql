@@ -163,7 +163,6 @@ CREATE TABLE `system_user` (
 -- Records of system_user
 -- ----------------------------
 INSERT INTO `system_user` VALUES ('1', '1000000000000000', '{bcrypt}$2a$10$vqbunqAHy9RJ.GPktuUzteQ2ve86q1pcLKABsSysuUia8XdvJEPx6', '真·张三', '张三', '2020-06-03 21:37:43');
-INSERT INTO `system_user` VALUES ('2', '2000000000000000', '2020652208590836', null, null, null);
 
 -- ----------------------------
 -- Table structure for system_user_roles
