@@ -73,9 +73,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity webSecurity) {
         //不拦截特定的访问路径
-        webSecurity.ignoring()
-                .antMatchers("/")
-                .antMatchers("/test/**");
+        webSecurity.ignoring().antMatchers("/")
+                .antMatchers("/swagger","/swagger/**")
+                .antMatchers("/test","/test/**");
+        //不拦截特定的静态文件
+        webSecurity.ignoring().antMatchers( "/**/*.js","/**/*.css", "/**/*.png", "/**/*.html" );
     }
 
     /**
@@ -89,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 // 跨域伪造请求限制.无效
-                .csrf().disable();
+                .csrf().disable().authorizeRequests();
         http
                 /*权限不足 可以在这里自定义返回内容 */
                 .exceptionHandling()
