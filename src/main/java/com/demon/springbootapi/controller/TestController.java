@@ -2,7 +2,7 @@ package com.demon.springbootapi.controller;
 
 import com.demon.springbootapi.util.ResponseBean;
 import org.apache.commons.codec.binary.Hex;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +18,7 @@ import java.security.MessageDigest;
 @RequestMapping(value = "test")
 public class TestController {
 
-    @PostMapping
+    @GetMapping
     public ResponseBean<String> getMd5(){
         ResponseBean<String> objectResponseBean = new ResponseBean<>();
         try{
