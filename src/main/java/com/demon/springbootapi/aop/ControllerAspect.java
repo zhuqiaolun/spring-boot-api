@@ -57,14 +57,13 @@ public class ControllerAspect {
                 if(attributes != null){
                     HttpServletRequest request = attributes.getRequest();
                     System.out.println("AOP处理中···");
+                    System.out.println("api_key："+ request.getHeader("api_key"));
                     return proceedingJoinPoint.proceed();
                 }
                 return new ResponseBean().setErrMsg("获取请求失败");
             }else{
                 return proceedingJoinPoint.proceed();
             }
-
-
         } catch (Exception e) {
             log.info("ControllerApi环绕AOP error ：{}", e);
             return new ResponseBean().setErrMsg(e.getMessage());
