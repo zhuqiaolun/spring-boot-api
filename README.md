@@ -68,5 +68,5 @@ sql语句：
 swagger:
 ```html
 项目集成swagger简易测试，访问：http://localhost:8011/spring-boot-api/swagger
-配置需要在SwaggerController.java中配置，也可以自行通过数据库去加载
+目前通过数据库去加载初始值
 ```
