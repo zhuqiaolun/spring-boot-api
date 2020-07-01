@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demon.springbootapi.database.dao.SystemSwaggerInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demon.springbootapi.database.entity.SystemSwaggerInfo">
+        <id column="si_id" property="siId" />
+        <result column="si_title" property="siTitle" />
+        <result column="si_version" property="siVersion" />
+        <result column="si_description" property="siDescription" />
+        <result column="si_schemes" property="siSchemes" />
+        <result column="si_serverhost" property="siServerhost" />
+        <result column="si_securityDefinitions" property="siSecuritydefinitions" />
+        <result column="si_contact_name" property="siContactName" />
+        <result column="si_contact_url" property="siContactUrl" />
+        <result column="si_contact_email" property="siContactEmail" />
+        <result column="si_createtime" property="siCreatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        si_id, si_title, si_version, si_description, si_schemes, si_securityDefinitions, si_contact_name, si_contact_url, si_contact_email, si_createtime
+    </sql>
+
+</mapper>
