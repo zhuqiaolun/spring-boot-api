@@ -53,10 +53,14 @@ public class SystemSwaggerInfo extends Model<SystemSwaggerInfo> {
     private String siSchemes;
 
     /**
-     * 请求ip
+     * 请求host:port/path
      */
     @TableField("si_serverhost")
     private String siServerhost;
+    @TableField("si_serverport")
+    private Integer siServerport;
+    @TableField("si_serverpath")
+    private String siServerpath;
 
     /**
      * 全局变量

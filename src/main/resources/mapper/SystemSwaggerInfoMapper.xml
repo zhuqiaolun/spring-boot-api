@@ -10,6 +10,8 @@
         <result column="si_description" property="siDescription" />
         <result column="si_schemes" property="siSchemes" />
         <result column="si_serverhost" property="siServerhost" />
+        <result column="si_serverport" property="siServerport"/>
+        <result column="si_serverpath" property="siServerpath"/>
         <result column="si_securityDefinitions" property="siSecuritydefinitions" />
         <result column="si_contact_name" property="siContactName" />
         <result column="si_contact_url" property="siContactUrl" />
@@ -19,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        si_id, si_title, si_version, si_description, si_schemes, si_securityDefinitions, si_contact_name, si_contact_url, si_contact_email, si_createtime
+        si_id, si_title, si_version, si_description, si_schemes,si_serverhost,si_serverport,si_serverpath, si_securityDefinitions, si_contact_name, si_contact_url, si_contact_email, si_createtime
     </sql>
 
 </mapper>

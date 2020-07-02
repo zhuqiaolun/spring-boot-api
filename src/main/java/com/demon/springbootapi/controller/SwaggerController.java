@@ -12,13 +12,13 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,15 +26,10 @@ import java.util.List;
  * @Description: swagger请求
  * @Author: Demon
  * @Date: 2020/6/30 11:23
- * @Copyright: 2020 www.yetech.com.cn Inc. All rights reserved.
- * 注意：本内容仅限于元镁信息科技（上海）有限公司内部传阅，禁止外泄以及用于其他的商业目
  */
 @Controller
 @RequestMapping(value = "swagger")
 public class SwaggerController {
-
-    @Resource
-    private Environment environment;
 
     @Resource
     private SystemSwaggerInfoService systemSwaggerInfoService;
@@ -57,7 +52,7 @@ public class SwaggerController {
     @GetMapping(value = "data.json")
     public @ResponseBody
     Object getJsonData() throws JsonProcessingException {
-        SystemSwaggerInfo systemSwaggerInfo = systemSwaggerInfoService.list().get(0);
+        SystemSwaggerInfo systemSwaggerInfo = new LinkedList<>(systemSwaggerInfoService.list()).getLast();
         JsonNodeFactory jsonNodeFactory = JsonNodeFactory.instance;
         ObjectNode dataJson = jsonNodeFactory.objectNode();
         dataJson.put("swagger", "2.0");
@@ -74,8 +69,8 @@ public class SwaggerController {
             .put("name","Apache 2.0")
             .put("url","http://www.apache.org/licenses/LICENSE-2.0.html")
         ;
-        dataJson.put("host", systemSwaggerInfo.getSiServerhost() + ":" + environment.getProperty("server.port"));
-        dataJson.put("basePath", environment.getProperty("server.servlet.context-path"));
+        dataJson.put("host", systemSwaggerInfo.getSiServerhost() + ":" + systemSwaggerInfo.getSiServerport());
+        dataJson.put("basePath", "/" + systemSwaggerInfo.getSiServerpath());
         dataJson.putArray("tags").addAll(getTags());
         dataJson.set("schemes",new ObjectMapper().readValue("[\"http\",\"https\"]", ArrayNode.class));
         dataJson.putObject("paths").setAll(getPaths());
@@ -111,7 +106,7 @@ public class SwaggerController {
         if (systemSwaggerUrls != null && systemSwaggerUrls.size() > 0) {
             systemSwaggerUrls.forEach(systemSwaggerUrl -> {
                 try {
-                    ObjectNode jsonNodes = paths.putObject(systemSwaggerUrl.getSuUrl()).putObject(systemSwaggerUrl.getSuMethod());
+                    ObjectNode jsonNodes = paths.putObject("/" + systemSwaggerUrl.getSuUrl()).putObject(systemSwaggerUrl.getSuMethod());
                     jsonNodes.putArray("tags").add(systemSwaggerUrl.getSuTags());
                     jsonNodes.put("summary", systemSwaggerUrl.getSuSummary());
                     jsonNodes.put("description", systemSwaggerUrl.getSuDescription());
