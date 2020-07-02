@@ -72,7 +72,7 @@ public class SwaggerController {
         dataJson.put("host", systemSwaggerInfo.getSiServerhost() + ":" + systemSwaggerInfo.getSiServerport());
         dataJson.put("basePath", "/" + systemSwaggerInfo.getSiServerpath());
         dataJson.putArray("tags").addAll(getTags());
-        dataJson.set("schemes",new ObjectMapper().readValue("[\"http\",\"https\"]", ArrayNode.class));
+        dataJson.set("schemes", new ObjectMapper().readValue(systemSwaggerInfo.getSiSchemes(), ArrayNode.class));
         dataJson.putObject("paths").setAll(getPaths());
         ObjectNode securityDefinitions = dataJson.putObject("securityDefinitions");
         securityDefinitions.putObject("api_key").put("type", "apiKey").put("name", "api_key").put("in", "header");
