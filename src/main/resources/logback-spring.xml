@@ -15,7 +15,7 @@
     <!-- 将日志写入数据库(官方) -->
     <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
         <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
-            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
             <url>jdbc:mysql://127.0.0.1:3306/spring_boot_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
             <user>root</user>
             <password>root</password>
@@ -25,7 +25,7 @@
     <!-- 将日志写入数据库(自定义) -->
     <appender name="DB_SQL" class="com.demon.springbootapi.config.LogDbAppenderConfig">
         <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
-            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
             <url>jdbc:mysql://127.0.0.1:3306/spring_boot_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
             <user>root</user>
             <password>root</password>
