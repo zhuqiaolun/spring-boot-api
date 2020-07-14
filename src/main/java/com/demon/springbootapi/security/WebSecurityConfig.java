@@ -74,10 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity webSecurity) {
         //不拦截特定的访问路径
         webSecurity.ignoring().antMatchers("/")
-                .antMatchers("/swagger","/swagger/**")
                 .antMatchers("/test","/test/**");
-        //不拦截特定的静态文件
-        webSecurity.ignoring().antMatchers( "/**/*.js","/**/*.css", "/**/*.png", "/**/*.html" );
     }
 
     /**
