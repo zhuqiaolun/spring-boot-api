@@ -64,9 +64,3 @@ sql语句：
 ```html
 语句通过P6Spy管理，将日志写入DB数据库内的自定义表 system_logging_sql，自行执行语句
 ```
-
-swagger:
-```html
-项目集成swagger简易测试，访问：http://localhost:8011/spring-boot-api/swagger
-目前通过数据库去加载初始值
-```
